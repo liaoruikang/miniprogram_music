@@ -1,15 +1,23 @@
-import App from './App.vue'
-import $http from '@/request/request.js'
+import App from '@/App.vue'
+import store from '@/store/index.js'
 
 // #ifndef VUE3
 import Vue from 'vue'
 
 Vue.config.productionTip = false
-Vue.prototype.$http = $http
 App.mpType = 'app'
 
+uni.$showMsg = function(title, duration, icon) {
+	uni.showToast({
+		title: title || '数据加载失败！',
+		duration: duration || 1500,
+		icon: icon || 'none'
+	})
+}
+
 const app = new Vue({
-	...App
+	...App,
+	store
 })
 app.$mount()
 // #endif

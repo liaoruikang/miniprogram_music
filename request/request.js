@@ -1,6 +1,11 @@
 import config from './config.js'
 
+let flag = false
+
 function $http(url, data = {}, method = 'GET') {
+	uni.showLoading({
+		title: '加载中...'
+	})
 	return new Promise((resolve, reject) => {
 		uni.request({
 			url: config.baseURL + url,
@@ -12,11 +17,17 @@ function $http(url, data = {}, method = 'GET') {
 			},
 			fail: (err) => {
 				reject(err)
+			},
+			complete: () => {
+				uni.hideLoading()
 			}
 		})
 	})
 }
 $http.get = (url, data = {}) => {
+	uni.showLoading({
+		title: '加载中...'
+	})
 	return new Promise((resolve, reject) => {
 		uni.request({
 			url: config.baseURL + url,
@@ -28,11 +39,17 @@ $http.get = (url, data = {}) => {
 			},
 			fail: (err) => {
 				reject(err)
+			},
+			complete: () => {
+				uni.hideLoading()
 			}
 		})
 	})
 }
 $http.post = (url, data = {}) => {
+	uni.showLoading({
+		title: '加载中...'
+	})
 	return new Promise((resolve, reject) => {
 		uni.request({
 			url: config.baseURL + url,
@@ -44,6 +61,9 @@ $http.post = (url, data = {}) => {
 			},
 			fail: (err) => {
 				reject(err)
+			},
+			complete: () => {
+				uni.hideLoading()
 			}
 		})
 	})

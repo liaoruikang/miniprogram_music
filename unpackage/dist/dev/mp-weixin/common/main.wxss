@@ -1,0 +1,16 @@
+@charset "UTF-8";
+/* 水平间距 */
+/* 水平间距 */
+page {
+  font-size: 28rpx;
+  color: #333;
+}
+.horizontal {
+  vertical-align: middle !important;
+}
+.omit {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+

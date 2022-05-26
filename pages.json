@@ -1,14 +1,24 @@
 {
 	"pages": [{
-		"path": "pages/index/index",
-		"style": {
-			"navigationBarTitleText": "uni-app"
+			"path": "pages/home/home",
+			"style": {
+				"navigationBarTitleText": "网易云音乐",
+				"enablePullDownRefresh": false
+			}
+		}, {
+			"path": "pages/playlist/playlist",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
 		}
-	}],
+
+	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "uni-app",
-		"navigationBarBackgroundColor": "#F8F8F8",
+		"navigationBarTitleText": "网易云音乐",
+		"navigationBarBackgroundColor": "#ffffff",
 		"backgroundColor": "#F8F8F8",
 		"app-plus": {
 			"background": "#efeff4"

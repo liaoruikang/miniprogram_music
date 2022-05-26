@@ -1,3 +1,3 @@
 export default {
-	baseURL: 'http://www.codeman.ink/api'
+	baseURL: 'https://www.codeman.ink/api'
 }

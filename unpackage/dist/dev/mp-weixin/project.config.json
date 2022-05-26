@@ -33,7 +33,7 @@
     "useCompilerPlugins": false
   },
   "compileType": "miniprogram",
-  "libVersion": "2.24.3",
+  "libVersion": "",
   "appid": "wx588e1329a92ea125",
   "projectname": "miniprogram_music",
   "condition": {},

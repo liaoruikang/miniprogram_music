@@ -1,12 +1,13 @@
 {
   "pages": [
-    "pages/index/index"
+    "pages/home/home",
+    "pages/playlist/playlist"
   ],
   "subPackages": [],
   "window": {
     "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "uni-app",
-    "navigationBarBackgroundColor": "#F8F8F8",
+    "navigationBarTitleText": "网易云音乐",
+    "navigationBarBackgroundColor": "#ffffff",
     "backgroundColor": "#F8F8F8"
   },
   "usingComponents": {}

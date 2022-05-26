@@ -1,0 +1,117 @@
+@charset "UTF-8";
+/* 水平间距 */
+/* 水平间距 */
+.home_container {
+  padding: 0 20rpx;
+}
+.home_container .userinfo_box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 90rpx;
+}
+.home_container .userinfo_box .user .avatar {
+  display: flex;
+  align-items: center;
+  color: #999999;
+}
+.home_container .userinfo_box .user .avatar .uni-icons {
+  color: #999999 !important;
+  font-size: 92rpx !important;
+}
+.home_container .userinfo_box .user .avatar image {
+  width: 92rpx;
+  height: 92rpx;
+  border-radius: 50%;
+}
+.home_container .userinfo_box .btn {
+  padding: 0 20rpx;
+  border: #999999 solid 1px;
+  line-height: 52rpx;
+  border-radius: 52rpx;
+}
+.home_container .search_box {
+  height: 80rpx;
+  background-color: #f7f7f7;
+  margin-top: 20rpx;
+  border-radius: 50rpx;
+}
+.home_container .search_box .uni-icons {
+  margin-left: 20rpx;
+  line-height: 80rpx;
+  color: #999999 !important;
+}
+.home_container .search_box text {
+  color: #999999;
+  font-size: 32rpx;
+  vertical-align: middle !important;
+  margin-top: -4rpx;
+  margin-left: 20rpx;
+}
+.home_container .banner {
+  margin-top: 20rpx;
+  border-radius: 16rpx;
+  overflow: hidden;
+  height: 300rpx;
+}
+.home_container .banner swiper-item {
+  position: relative;
+}
+.home_container .banner swiper-item image {
+  width: 100%;
+  height: 100%;
+}
+.home_container .banner swiper-item .title {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 0 16rpx;
+  line-height: 48rpx;
+  font-size: 20rpx;
+  color: #fff;
+  border-top-left-radius: 16rpx;
+}
+.home_container .toplist_box {
+  display: flex;
+  flex-wrap: wrap;
+  padding-bottom: 40rpx;
+}
+.home_container .toplist_box .toplist_item {
+  margin-top: 20rpx;
+  display: flex;
+  overflow: hidden;
+}
+.home_container .toplist_box .toplist_item .img {
+  position: relative;
+  width: 240rpx;
+  height: 240rpx;
+}
+.home_container .toplist_box .toplist_item .img image {
+  width: 100%;
+  height: 100%;
+  border-radius: 16rpx;
+}
+.home_container .toplist_box .toplist_item .img .more {
+  position: absolute;
+  bottom: 10rpx;
+  left: 10rpx;
+  font-size: 24rpx;
+  color: #fff;
+}
+.home_container .toplist_box .toplist_item .songlist {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  margin: 0 10px;
+  color: #666666;
+  font-size: 30rpx;
+}
+.home_container .toplist_box .toplist_item .songlist view {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
