@@ -95,6 +95,9 @@ __webpack_require__.r(__webpack_exports__);
 var components
 try {
   components = {
+    navigationBar: function() {
+      return __webpack_require__.e(/*! import() | components/navigationBar/navigationBar */ "components/navigationBar/navigationBar").then(__webpack_require__.bind(null, /*! @/components/navigationBar/navigationBar.vue */ 53))
+    },
     uniIcons: function() {
       return Promise.all(/*! import() | uni_modules/uni-icons/components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-icons/components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-icons/components/uni-icons/uni-icons.vue */ 60))
     },
@@ -106,6 +109,9 @@ try {
     },
     uniCard: function() {
       return __webpack_require__.e(/*! import() | uni_modules/uni-card/components/uni-card/uni-card */ "uni_modules/uni-card/components/uni-card/uni-card").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-card/components/uni-card/uni-card.vue */ 82))
+    },
+    homeSkeleton: function() {
+      return __webpack_require__.e(/*! import() | components/home-skeleton/home-skeleton */ "components/home-skeleton/home-skeleton").then(__webpack_require__.bind(null, /*! @/components/home-skeleton/home-skeleton.vue */ 89))
     }
   }
 } catch (e) {
@@ -129,17 +135,18 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  var l0 = _vm.cookie
-    ? _vm.__map(_vm.topList, function(item, __i0__) {
-        var $orig = _vm.__get_orig(item)
+  var l0 =
+    _vm.show && _vm.cookie
+      ? _vm.__map(_vm.topList, function(item, __i0__) {
+          var $orig = _vm.__get_orig(item)
 
-        var g0 = item.tracks && item.tracks.slice(0, 3)
-        return {
-          $orig: $orig,
-          g0: g0
-        }
-      })
-    : null
+          var g0 = item.tracks && item.tracks.slice(0, 3)
+          return {
+            $orig: $orig,
+            g0: g0
+          }
+        })
+      : null
 
   if (!_vm._isMounted) {
     _vm.e0 = function($event) {
@@ -266,6 +273,18 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 var _vuex = __webpack_require__(/*! vuex */ 12);
 var _index = __webpack_require__(/*! @/api/index.js */ 13);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var _default =
 
@@ -274,13 +293,29 @@ var _index = __webpack_require__(/*! @/api/index.js */ 13);function _interopRequ
 
 
 {
-  computed: _objectSpread({},
-  (0, _vuex.mapState)(['systemInfo', 'userData', 'cookie'])),
+  computed: _objectSpread(_objectSpread({},
+  (0, _vuex.mapState)(['systemInfo', 'userData', 'cookie'])), {}, {
+    show: function show() {
+      if (this.cookie) {
+        if (this.bannerList.length && this.topList.length) {
+          return true;
+        } else {
+          return false;
+        }
+      } else {
+        if (this.bannerList.length) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+    } }),
 
   watch: {
     cookie: {
       immediate: true,
       handler: function handler(val) {
+        if (this.topList.length > 0) return;
         if (val) this.getTopList();
       } } },
 
@@ -292,7 +327,10 @@ var _index = __webpack_require__(/*! @/api/index.js */ 13);function _interopRequ
       // 歌单列表
       topList: [],
       type: 'center',
-      showPopup: false };
+      showPopup: false,
+      navigatorBarAndStatusBarHeight:
+      uni.getStorageSync('navigationBarHeight') +
+      uni.getStorageSync('statusBarHeight') };
 
   },
   onLoad: function onLoad() {

@@ -4285,7 +4285,7 @@ module.exports = index_cjs;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.logoutApi = exports.loginStatusApi = exports.loginApi = exports.getCodeList = exports.getPlayListDetailApi = exports.getTopApi = exports.getBannerApi = void 0;var _request = _interopRequireDefault(__webpack_require__(/*! @/request/request.js */ 14));
+Object.defineProperty(exports, "__esModule", { value: true });exports.commentLikeApi = exports.getHotCommentApi = exports.getSimiSongApi = exports.getLyricApi = exports.getSongDetailApi = exports.getSongUrlApi = exports.logoutApi = exports.loginStatusApi = exports.loginApi = exports.getCodeList = exports.getPlayListDetailApi = exports.getTopApi = exports.getBannerApi = void 0;var _request = _interopRequireDefault(__webpack_require__(/*! @/request/request.js */ 14));
 var _index = _interopRequireDefault(__webpack_require__(/*! @/store/index.js */ 16));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 
 // 获取轮播图列表
@@ -4306,9 +4306,13 @@ exports.getTopApi = getTopApi;var getPlayListDetailApi = function getPlayListDet
   return _request.default.get('/playlist/detail', {
     id: id,
     s: s,
-    cookie: cookie });
+    cookie: cookie,
+    limit: 3 });
 
 };
+
+
+
 // 获取国家编码列表
 exports.getPlayListDetailApi = getPlayListDetailApi;var getCodeList = function getCodeList() {
   return _request.default.get('/countries/code/list');
@@ -4342,7 +4346,71 @@ exports.loginStatusApi = loginStatusApi;var logoutApi = function logoutApi() {
     cookie: cookie,
     timestamp: timestamp });
 
-};exports.logoutApi = logoutApi;
+};
+
+// 获取歌曲url
+exports.logoutApi = logoutApi;var getSongUrlApi = function getSongUrlApi(id, br) {
+  br = br ? br : 320000;
+  var cookie = encodeURIComponent(_index.default.state.cookie);
+  return _request.default.get('/song/url', {
+    id: id,
+    br: br,
+    cookie: cookie });
+
+};
+
+// 获取歌曲详情
+exports.getSongUrlApi = getSongUrlApi;var getSongDetailApi = function getSongDetailApi(ids) {
+  var cookie = encodeURIComponent(_index.default.state.cookie);
+  return _request.default.get('/song/detail', {
+    ids: ids,
+    cookie: cookie });
+
+};
+
+// 获取歌曲歌词
+exports.getSongDetailApi = getSongDetailApi;var getLyricApi = function getLyricApi(id) {
+  var cookie = encodeURIComponent(_index.default.state.cookie);
+  return _request.default.get('/lyric', {
+    id: id,
+    cookie: cookie });
+
+};
+
+// 获取相似歌曲
+exports.getLyricApi = getLyricApi;var getSimiSongApi = function getSimiSongApi(id) {
+  var cookie = encodeURIComponent(_index.default.state.cookie);
+  return _request.default.get('/simi/song', {
+    id: id,
+    cookie: cookie });
+
+};
+
+// 获取热门评论
+exports.getSimiSongApi = getSimiSongApi;var getHotCommentApi = function getHotCommentApi(id, type) {
+  var timestamp = new Date().getTime();
+  var cookie = encodeURIComponent(_index.default.state.cookie);
+  return _request.default.get('/comment/hot', {
+    id: id,
+    type: type,
+    cookie: cookie,
+    timestamp: timestamp });
+
+};
+
+// 给评论点赞
+exports.getHotCommentApi = getHotCommentApi;var commentLikeApi = function commentLikeApi(id, cid, t, type) {
+  var timestamp = new Date().getTime();
+  var cookie = encodeURIComponent(_index.default.state.cookie);
+  return _request.default.get('/comment/like', {
+    id: id,
+    cid: cid,
+    t: t,
+    type: type,
+    cookie: cookie,
+    timestamp: timestamp });
+
+};exports.commentLikeApi = commentLikeApi;
 
 /***/ }),
 
@@ -4461,7 +4529,9 @@ new _vuex.default.Store({
     systemInfo: {},
     codeList: {},
     cookie: uni.getStorageSync('cookie') || '',
-    userData: JSON.parse(uni.getStorageSync('userData') || '{}') },
+    userData: JSON.parse(uni.getStorageSync('userData') || '{}'),
+    songlist: [],
+    currentPlay: {} },
 
   mutations: {
     // 更新设备信息
@@ -4484,6 +4554,12 @@ new _vuex.default.Store({
     },
     saveStorageUserData: function saveStorageUserData(state) {
       uni.setStorageSync('userData', JSON.stringify(state.userData));
+    },
+    updateSonglist: function updateSonglist(state, val) {
+      state.songlist = val;
+    },
+    updateCurrentPlay: function updateCurrentPlay(state, val) {
+      state.currentPlay = val;
     } },
 
   actions: {},

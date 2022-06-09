@@ -31,6 +31,8 @@
   border-radius: 52rpx;
 }
 .home_container .search_box {
+  display: flex;
+  align-items: center;
   height: 80rpx;
   background-color: #f7f7f7;
   margin-top: 20rpx;
@@ -38,15 +40,14 @@
 }
 .home_container .search_box .uni-icons {
   margin-left: 20rpx;
+  margin-right: 20rpx;
   line-height: 80rpx;
   color: #999999 !important;
 }
-.home_container .search_box text {
+.home_container .search_box .horizontal {
   color: #999999;
   font-size: 32rpx;
-  vertical-align: middle !important;
-  margin-top: -4rpx;
-  margin-left: 20rpx;
+  smargin-left: 20rpx;
 }
 .home_container .banner {
   margin-top: 20rpx;
@@ -84,8 +85,8 @@
 }
 .home_container .toplist_box .toplist_item .img {
   position: relative;
-  width: 240rpx;
-  height: 240rpx;
+  width: 220rpx;
+  height: 220rpx;
 }
 .home_container .toplist_box .toplist_item .img image {
   width: 100%;

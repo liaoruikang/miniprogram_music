@@ -1,5 +1,9 @@
 {
-  "navigationBarTitleText": "",
+  "navigationBarTextStyle": "white",
   "enablePullDownRefresh": false,
-  "usingComponents": {}
+  "usingComponents": {
+    "navigation-bar": "/components/navigationBar/navigationBar",
+    "uni-icons": "/uni_modules/uni-icons/components/uni-icons/uni-icons",
+    "playlist-skeleton": "/components/playlist-skeleton/playlist-skeleton"
+  }
 }

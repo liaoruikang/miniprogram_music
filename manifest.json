@@ -54,6 +54,7 @@
 		"setting": {
 			"urlCheck": false
 		},
+		"requiredBackgroundModes": ["audio"],
 		"usingComponents": true
 	},
 	"vueVersion": "2"
