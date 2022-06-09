@@ -1,0 +1,21 @@
+@font-face {
+	font-family: "icomoon";
+	src: url('@/static/font/icomoon.ttf') format('truetype');
+}
+
+.icomoon {
+	font-family: "icomoon" !important;
+	font-size: 16px;
+}
+
+.icon-play2:before {
+	content: "\ea15";
+}
+
+.icon-play:before {
+	content: "\e90d";
+}
+
+.icon-pause:before {
+	content: "\e90c";
+}

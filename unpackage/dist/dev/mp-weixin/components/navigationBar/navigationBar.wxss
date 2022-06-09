@@ -1,0 +1,60 @@
+@charset "UTF-8";
+/* 水平间距 */
+/* 水平间距 */
+.navbar_box {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  width: 100%;
+}
+.navbar_box .bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.navbar_box .bg .mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 99;
+}
+.navbar_box .bg .statusBarBg {
+  position: relative;
+  z-index: 100;
+}
+.navbar_box .navigatorBar {
+  z-index: 999;
+  position: relative;
+}
+.navbar_box .navigatorBar .title {
+  text-align: center;
+}
+.navbar_box .navigatorBar .nav {
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  border: 1px solid #c6c6c6;
+  border-radius: 28px;
+}
+.navbar_box .navigatorBar .nav .back,
+.navbar_box .navigatorBar .nav .home {
+  padding: 0 10px;
+}
+.navbar_box .navigatorBar .nav .back uni-icons,
+.navbar_box .navigatorBar .nav .home uni-icons {
+  display: flex;
+  align-items: center;
+}
+.navbar_box .navigatorBar .nav .line {
+  width: 1px;
+  height: 12px;
+  background-color: #c6c6c6;
+}
+

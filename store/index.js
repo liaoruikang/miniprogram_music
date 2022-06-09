@@ -9,6 +9,8 @@ export default new Vuex.Store({
 		codeList: {},
 		cookie: uni.getStorageSync('cookie') || '',
 		userData: JSON.parse(uni.getStorageSync('userData') || '{}'),
+		songlist: [],
+		currentPlay: {},
 	},
 	mutations: {
 		// 更新设备信息
@@ -31,6 +33,12 @@ export default new Vuex.Store({
 		},
 		saveStorageUserData(state) {
 			uni.setStorageSync('userData', JSON.stringify(state.userData))
+		},
+		updateSonglist(state, val) {
+			state.songlist = val
+		},
+		updateCurrentPlay(state, val) {
+			state.currentPlay = val
 		}
 	},
 	actions: {},

@@ -1,77 +1,89 @@
 <template>
 	<view class="home_container">
-		<!-- 用户信息 -->
-		<view class="userinfo_box">
-			<view class="user">
-				<view class="avatar" v-if="cookie">
-					<image :src="userData.profile.avatarUrl"></image>
-					<text>{{ userData.profile.nickname }}</text>
-				</view>
-				<view class="avatar" v-else>
-					<uni-icons type="contact-filled" size="46"></uni-icons>
-					<text>未登录</text>
-				</view>
-			</view>
-			<view class="btn" @click="cookie ? logout() : toggle('center')">
-				{{ cookie ? '退出登录' : '立即登录' }}
-			</view>
-		</view>
-		<uni-popup ref="popup" type="bottom" @change="popupChange">
-			<Login :showPopup="showPopup" @loginChange="closePopup()"></Login>
-		</uni-popup>
-		<!-- 搜索 -->
-		<view class="search_box">
-			<uni-icons type="search" size="28"></uni-icons>
-			<text class="horizontal">搜索歌曲</text>
-		</view>
-		<!-- 轮播图 -->
-		<swiper
-			class="banner"
-			indicator-dots
-			indicator-active-color="#fff"
-			autoplay
-			circular
-			v-if="bannerList.length"
+		<!-- 自定义navbar -->
+		<navigationBar></navigationBar>
+
+		<scroll-view
+			v-if="show"
+			scroll-y
+			:style="{
+				height: systemInfo.windowHeight - navigatorBarAndStatusBarHeight + 'px'
+			}"
 		>
-			<swiper-item v-for="(item, index) in bannerList" :key="index">
-				<image :src="item.pic"></image>
-				<view class="title" :style="{ background: item.titleColor }">
-					{{ item.typeTitle }}
+			<!-- 用户信息 -->
+			<view class="userinfo_box">
+				<view class="user">
+					<view class="avatar" v-if="cookie">
+						<image :src="userData.profile.avatarUrl"></image>
+						<text>{{ userData.profile.nickname }}</text>
+					</view>
+					<view class="avatar" v-else>
+						<uni-icons type="contact-filled" size="46"></uni-icons>
+						<text>未登录</text>
+					</view>
 				</view>
-			</swiper-item>
-		</swiper>
-		<!-- 歌单列表 -->
-		<view class="toplist_box" v-if="cookie">
-			<view
-				class="toplist_item"
-				v-for="item in topList"
-				:key="item.id"
-				@click="goToPlayList"
+				<view class="btn" @click="cookie ? logout() : toggle('center')">
+					{{ cookie ? '退出登录' : '立即登录' }}
+				</view>
+			</view>
+			<uni-popup ref="popup" type="bottom" @change="popupChange">
+				<Login :showPopup="showPopup" @loginChange="closePopup()"></Login>
+			</uni-popup>
+			<!-- 搜索 -->
+			<view class="search_box">
+				<uni-icons type="search" size="28"></uni-icons>
+				<view class="horizontal">搜索歌曲</view>
+			</view>
+			<!-- 轮播图 -->
+			<swiper
+				class="banner"
+				indicator-dots
+				indicator-active-color="#fff"
+				autoplay
+				circular
+				v-if="bannerList.length"
 			>
-				<view class="img">
-					<image :src="item.coverImgUrl"></image>
-					<view class="more">{{ item.updateFrequency }}</view>
-				</view>
-				<view class="songlist">
-					<view
-						v-for="(val, index) in item.tracks && item.tracks.slice(0, 3)"
-						:key="val.id"
-					>
-						<text>{{ `${index + 1}. ${val.name}` + ' - ' }}</text>
-						<text v-for="(ar, i) in val.ar" :key="ar.id">
-							{{ ar.name + (i !== val.ar.length - 1 ? '/' : '') }}
-						</text>
+				<swiper-item v-for="(item, index) in bannerList" :key="index">
+					<image :src="item.pic"></image>
+					<view class="title" :style="{ background: item.titleColor }">
+						{{ item.typeTitle }}
+					</view>
+				</swiper-item>
+			</swiper>
+			<!-- 歌单列表 -->
+			<view class="toplist_box" v-if="cookie">
+				<view
+					class="toplist_item"
+					v-for="item in topList"
+					:key="item.id"
+					@click="goToPlayList(item.id)"
+				>
+					<view class="img">
+						<image :src="item.coverImgUrl"></image>
+						<view class="more">{{ item.updateFrequency }}</view>
+					</view>
+					<view class="songlist">
+						<view
+							v-for="(val, index) in item.tracks && item.tracks.slice(0, 3)"
+							:key="val.id"
+						>
+							<text>{{ `${index + 1}. ${val.name}` + ' - ' }}</text>
+							<text v-for="(ar, i) in val.ar" :key="ar.id">
+								{{ ar.name + (i !== val.ar.length - 1 ? '/' : '') }}
+							</text>
+						</view>
 					</view>
 				</view>
 			</view>
-		</view>
-		<view class="login_text" v-if="!cookie">
-			<uni-section title="基础卡片" type="line">
-				<uni-card :is-shadow="false">
-					<view style="text-align: center;">登陆后可获取更多内容</view>
-				</uni-card>
-			</uni-section>
-		</view>
+			<view class="login_text" v-if="!cookie">
+				<uni-section title="基础卡片" type="line">
+					<uni-card :is-shadow="false">
+						<view style="text-align: center;">登陆后可获取更多内容</view>
+					</uni-card>
+				</uni-section>
+			</view>
+		</scroll-view>
+		<home-skeleton v-if="!show"></home-skeleton>
 	</view>
 </template>
 
@@ -85,12 +97,28 @@ import {
 } from '@/api/index.js'
 export default {
 	computed: {
-		...mapState(['systemInfo', 'userData', 'cookie'])
+		...mapState(['systemInfo', 'userData', 'cookie']),
+		show() {
+			if (this.cookie) {
+				if (this.bannerList.length && this.topList.length) {
+					return true
+				} else {
+					return false
+				}
+			} else {
+				if (this.bannerList.length) {
+					return true
+				} else {
+					return false
+				}
+			}
+		}
 	},
 	watch: {
 		cookie: {
 			immediate: true,
 			handler(val) {
+				if (this.topList.length > 0) return
 				if (val) this.getTopList()
 			}
 		}
@@ -102,7 +130,10 @@ export default {
 			// 歌单列表
 			topList: [],
 			type: 'center',
-			showPopup: false
+			showPopup: false,
+			navigatorBarAndStatusBarHeight:
+				uni.getStorageSync('navigationBarHeight') +
+				uni.getStorageSync('statusBarHeight')
 		}
 	},
 	onLoad() {
@@ -194,21 +225,22 @@ export default {
 		}
 	}
 	.search_box {
+		display: flex;
+		align-items: center;
 		height: 80rpx;
 		background-color: #f7f7f7;
 		margin-top: 20rpx;
 		border-radius: 50rpx;
 		.uni-icons {
 			margin-left: 20rpx;
+			margin-right: 20rpx;
 			line-height: 80rpx;
 			color: #999999 !important;
 		}
-		text {
+		.horizontal {
 			color: #999999;
 			font-size: 32rpx;
-			vertical-align: middle !important;
-			margin-top: -4rpx;
-			margin-left: 20rpx;
+			smargin-left: 20rpx;
 		}
 	}
 
@@ -246,8 +278,8 @@ export default {
 			overflow: hidden;
 			.img {
 				position: relative;
-				width: 240rpx;
-				height: 240rpx;
+				width: 220rpx;
+				height: 220rpx;
 				image {
 					width: 100%;
 					height: 100%;

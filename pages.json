@@ -2,27 +2,44 @@
 	"pages": [{
 			"path": "pages/home/home",
 			"style": {
-				"navigationBarTitleText": "网易云音乐",
+				"navigationBarTextStyle": "black",
 				"enablePullDownRefresh": false
 			}
 		}, {
 			"path": "pages/playlist/playlist",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTextStyle": "white",
 				"enablePullDownRefresh": false
 			}
 
 		}
 
-	],
+	    ,{
+            "path" : "pages/playlist-desc/playlist-desc",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/song/song",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
 	"globalStyle": {
-		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "网易云音乐",
-		"navigationBarBackgroundColor": "#ffffff",
 		"backgroundColor": "#F8F8F8",
+		"navigationStyle": "custom",
 		"app-plus": {
 			"background": "#efeff4"
 		}
 	},
 	"sitemapLocation": "sitemap.json"
+
 }
