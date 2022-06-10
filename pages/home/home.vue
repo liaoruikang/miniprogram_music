@@ -30,7 +30,7 @@
 				<Login :showPopup="showPopup" @loginChange="closePopup()"></Login>
 			</uni-popup>
 			<!-- 搜索 -->
-			<view class="search_box">
+			<view class="search_box" @click="gotoSearch">
 				<uni-icons type="search" size="28"></uni-icons>
 				<view class="horizontal">搜索歌曲</view>
 			</view>
@@ -188,6 +188,11 @@ export default {
 			uni.navigateTo({
 				url: `/pages/playlist/playlist?id=${id}`
 			})
+		},
+		gotoSearch() {
+			uni.navigateTo({
+				url: '/pages/search/search'
+			})
 		}
 	}
 }
@@ -240,7 +245,6 @@ export default {
 		.horizontal {
 			color: #999999;
 			font-size: 32rpx;
-			smargin-left: 20rpx;
 		}
 	}
 

@@ -3,7 +3,8 @@
     "pages/home/home",
     "pages/playlist/playlist",
     "pages/playlist-desc/playlist-desc",
-    "pages/song/song"
+    "pages/song/song",
+    "pages/search/search"
   ],
   "subPackages": [],
   "window": {

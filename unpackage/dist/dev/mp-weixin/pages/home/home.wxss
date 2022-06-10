@@ -47,7 +47,6 @@
 .home_container .search_box .horizontal {
   color: #999999;
   font-size: 32rpx;
-  smargin-left: 20rpx;
 }
 .home_container .banner {
   margin-top: 20rpx;

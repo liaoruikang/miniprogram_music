@@ -80,7 +80,6 @@
   height: 240rpx;
   text-align: center;
   overflow: hidden;
-  line-height: 80rpx;
   margin: 40rpx 0;
 }
 .song_box .main .lyric .lyric_centent {
@@ -88,6 +87,11 @@
   transition: all 0.5s;
 }
 .song_box .main .lyric .lyric_centent .txt {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  height: 80rpx;
   color: #cccccc50;
   font-size: 30rpx;
 }

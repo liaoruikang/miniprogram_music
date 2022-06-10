@@ -125,3 +125,27 @@ export const commentLikeApi = (id, cid, t, type) => {
 	})
 
 }
+
+// 获取热门搜索列表
+export const getSearchHotApi = () => {
+	return request.get('/search/hot/detail')
+}
+
+// 获取搜索建议
+export const getSearchSuggestApi = (keywords, type) => {
+	return request.get('/search/suggest', {
+		keywords,
+		type
+	}, false)
+}
+
+// 搜索
+export const getSearchApi = (keywords, limit, type, ) => {
+	const cookie = encodeURIComponent(store.state.cookie)
+	return request.get('/cloudsearch', {
+		keywords,
+		limit,
+		type,
+		cookie
+	}, false)
+}

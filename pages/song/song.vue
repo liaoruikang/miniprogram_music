@@ -48,7 +48,7 @@
 							v-for="(item, index) in lyric"
 							:key="index"
 						>
-							{{ item.centent }}
+							<view>{{ item.centent }}</view>
 						</view>
 					</view>
 				</view>
@@ -176,6 +176,9 @@ export default {
 		},
 		initAudio(title, singer, coverImgUrl, src, stop) {
 			if (title === this.audio.title) return (this.isPlay = true)
+			if (this.currentPlay.fee === 1 || this.currentPlay.fee === 4) {
+				uni.$showMsg('正在播放会员歌曲')
+			}
 			this.audio.title = title
 			this.audio.singer = singer
 			this.audio.coverImgUrl = coverImgUrl
@@ -345,12 +348,16 @@ export default {
 			height: 240rpx;
 			text-align: center;
 			overflow: hidden;
-			line-height: 80rpx;
 			margin: 40rpx 0;
 			.lyric_centent {
 				position: relative;
 				transition: all 0.5s;
 				.txt {
+					display: flex;
+					justify-content: center;
+					align-content: center;
+					align-items: center;
+					height: 80rpx;
 					color: #cccccc50;
 					font-size: 30rpx;
 				}

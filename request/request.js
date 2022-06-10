@@ -24,10 +24,12 @@ function $http(url, data = {}, method = 'GET') {
 		})
 	})
 }
-$http.get = (url, data = {}) => {
-	uni.showLoading({
-		title: '加载中...'
-	})
+$http.get = (url, data = {}, isMsg = true) => {
+	if (isMsg) {
+		uni.showLoading({
+			title: '加载中...'
+		})
+	}
 	return new Promise((resolve, reject) => {
 		uni.request({
 			url: config.baseURL + url,
@@ -41,7 +43,9 @@ $http.get = (url, data = {}) => {
 				reject(err)
 			},
 			complete: () => {
-				uni.hideLoading()
+				if (isMsg) {
+					uni.hideLoading()
+				}
 			}
 		})
 	})
